@@ -889,6 +889,18 @@ img {
     .swiper-button-next {
         display: none !important;
     }
+
+    .scroll-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 20px;
+    }
+  
+    .scroll-to-top {
+        z-index: 1000 !important;
+    }
 }
 
 @media (max-width: 576px) {
@@ -948,7 +960,19 @@ img {
     
     .swiper {
         width: 100vw;
-}
+    }
+    
+    .scroll-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 20px;
+    }
+  
+    .scroll-to-top {
+        z-index: 1000 !important;
+    }
 }
 
 .rooms-grid {
