@@ -47,20 +47,50 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Initialize main gallery swiper
+    // Initialize main gallery swiper with custom pagination
     const gallerySwiperEl = document.querySelector('.gallery-swiper');
     if (gallerySwiperEl) {
+        // Создаем кастомный элемент для пагинации
+        const customPagination = document.createElement('div');
+        customPagination.className = 'swiper-pagination-custom';
+        gallerySwiperEl.appendChild(customPagination);
+        
+        // Инициализируем Swiper
         const gallerySwiper = new Swiper(gallerySwiperEl, {
             loop: true,
             pagination: {
                 el: '.swiper-pagination',
-                clickable: true,
+                type: 'fraction',
+                renderFraction: function(currentClass, totalClass) {
+                    return `<span class="${currentClass}"></span>/<span class="${totalClass}"></span>`;
+                }
             },
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+            on: {
+                init: function() {
+                    updateCustomPagination(this);
+                },
+                slideChange: function() {
+                    updateCustomPagination(this);
+                }
+            }
         });
+        
+        // Функция для обновления кастомной пагинации
+        function updateCustomPagination(swiper) {
+            const current = swiper.realIndex + 1;
+            const total = swiper.slides.length;
+            customPagination.textContent = `${current}/${total}`;
+        }
+        
+        // Скрываем стандартную пагинацию
+        const defaultPagination = gallerySwiperEl.querySelector('.swiper-pagination');
+        if (defaultPagination) {
+            defaultPagination.style.display = 'none';
+        }
         
         // Add zoomable class to gallery images
         gallerySwiperEl.querySelectorAll('.swiper-slide img').forEach(img => {
@@ -243,3 +273,30 @@ function handleResize() {
 window.addEventListener('load', handleResize);
 window.addEventListener('resize', handleResize);
 setTimeout(handleResize, 500);
+
+
+
+// Кнопка "Наверх"
+const scrollToTopBtn = document.createElement('button');
+scrollToTopBtn.id = 'scrollToTopBtn';
+scrollToTopBtn.className = 'scroll-to-top';
+scrollToTopBtn.title = 'Наверх';
+scrollToTopBtn.innerHTML = '↑';
+document.body.appendChild(scrollToTopBtn);
+
+// Показываем/скрываем кнопку при скролле
+window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('visible');
+    } else {
+        scrollToTopBtn.classList.remove('visible');
+    }
+});
+
+// Плавный скролл вверх при клике
+scrollToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
