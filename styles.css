@@ -961,7 +961,7 @@ img {
     .swiper {
         width: 100vw;
     }
-    
+
     .scroll-to-top {
         width: 40px;
         height: 40px;
@@ -1235,22 +1235,6 @@ img {
     max-height: 100%;
     width: auto;
     height: auto;
-}
-
-@supports (-webkit-touch-callout: none) {
-    body {
-        height: -webkit-fill-available;
-    }
-    
-    .hero {
-        height: -webkit-fill-available;
-        min-height: -webkit-fill-available;
-    }
-    
-    .header {
-        position: sticky;
-        top: 0;
-    }
 }
 
 .scroll-to-top {
