@@ -300,3 +300,18 @@ scrollToTopBtn.addEventListener('click', function() {
         behavior: 'smooth'
     });
 });
+
+function checkMobileButtonVisibility() {
+  const isMobile = window.innerWidth <= 768;
+  const scrollPosition = window.pageYOffset;
+  
+  if (isMobile && scrollPosition > 300) {
+    scrollToTopBtn.style.display = 'flex';
+  } else if (isMobile) {
+    scrollToTopBtn.style.display = 'none';
+  }
+}
+
+window.addEventListener('load', checkMobileButtonVisibility);
+window.addEventListener('resize', checkMobileButtonVisibility);
+window.addEventListener('scroll', checkMobileButtonVisibility);
